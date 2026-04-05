@@ -3,10 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skillcape — AI Solutions for Your Business</title>
+    <title>Skillcape — AI Agency | Voice Agents, Chatbots & Automation</title>
+    <meta name="description" content="Skillcape is an AI agency that builds voice agents, chatbots, missed call text back systems, and custom AI solutions for businesses. Get a free quote today.">
+    <link rel="canonical" href="https://skill-cape.com">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skill-cape.com">
+    <meta property="og:title" content="Skillcape — AI Agency | Voice Agents, Chatbots & Automation">
+    <meta property="og:description" content="We build AI that works for your business. Voice agents, chatbots, missed call text back, and custom AI solutions — end to end.">
+    <meta property="og:site_name" content="Skillcape">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Skillcape — AI Agency | Voice Agents, Chatbots & Automation">
+    <meta name="twitter:description" content="We build AI that works for your business. Voice agents, chatbots, missed call text back, and custom AI solutions.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Skillcape",
+        "url": "https://skill-cape.com",
+        "email": "james@skill-cape.com",
+        "description": "AI agency specializing in voice agents, chatbots, missed call text back, and custom AI solutions for businesses.",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "james@skill-cape.com",
+            "contactType": "sales"
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "AI Solutions",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Voice AI Agents",
+                        "description": "Intelligent voice agents that handle calls, answer questions, and book appointments around the clock."
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Website Chatbots",
+                        "description": "Custom chatbots that engage visitors, capture leads, and provide instant support."
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Missed Call Text Back",
+                        "description": "Automatically respond to missed calls with a personalized text message."
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Custom AI Solutions",
+                        "description": "Bespoke AI systems tailored to your business operations."
+                    }
+                }
+            ]
+        }
+    }
+    </script>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -49,9 +123,9 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Globe Section — between hero and services */
-        .globe-section { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; padding: 0 24px 0; margin-top: -60px; }
-        .globe-wrapper { position: relative; width: 500px; height: 500px; opacity: 0; animation: fadeUp 1.2s 1s forwards; }
-        .globe-wrapper canvas { width: 500px !important; height: 500px !important; display: block; }
+        .globe-section { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; padding: 0 24px 0; margin-top: -60px; overflow: hidden; }
+        .globe-wrapper { position: relative; width: 500px; max-width: 100%; height: 500px; opacity: 0; animation: fadeUp 1.2s 1s forwards; }
+        .globe-wrapper canvas { width: 100% !important; height: auto !important; max-width: 500px; display: block; margin: 0 auto; aspect-ratio: 1; }
         .globe-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, rgba(6,182,212,0.05) 40%, transparent 70%); filter: blur(50px); pointer-events: none; }
 
         /* Section shared */
@@ -130,7 +204,7 @@
         .why-grid .why-item:nth-child(3) { transition-delay: 0.16s; }
 
         @media (max-width: 768px) {
-            .globe-wrapper { width: 320px; height: 320px; }
+            .globe-wrapper { width: 300px; height: 300px; max-width: 85vw; }
             .globe-glow { width: 240px; height: 240px; }
             .services-grid { grid-template-columns: 1fr; }
             .why-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -140,16 +214,17 @@
     </style>
 </head>
 <body>
-    <canvas id="particles"></canvas>
+    <canvas id="particles" aria-hidden="true"></canvas>
 
-    <nav class="nav">
+    <nav class="nav" aria-label="Main navigation">
         <div class="nav-inner">
             <a href="#" class="nav-logo">skillcape</a>
             <a href="#" class="nav-cta" onclick="openModal(); return false;">Request a Quote</a>
         </div>
     </nav>
 
-    <!-- Hero — same centered layout as current site -->
+    <main>
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">AI Agency</div>
@@ -166,7 +241,7 @@
     <section class="globe-section">
         <div class="globe-wrapper">
             <div class="globe-glow"></div>
-            <canvas id="globe"></canvas>
+            <canvas id="globe" aria-label="Spinning 3D globe showing worldwide AI coverage" role="img"></canvas>
         </div>
     </section>
 
@@ -214,7 +289,9 @@
     </footer>
 
     <!-- Quote Modal -->
-    <div class="modal-overlay" id="modal">
+    </main>
+
+    <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-label="Request a quote">
         <div class="modal">
             <button class="modal-close" onclick="closeModal()">&times;</button>
             <div id="formContent">
