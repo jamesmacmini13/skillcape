@@ -105,7 +105,12 @@
         .form-success { text-align: center; padding: 20px 0; }
         .form-success h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
         .form-success p { color: var(--text-muted); font-size: 0.9375rem; }
-        .modal-email-btn { font-size: 0.9375rem; text-align: center; margin-bottom: 0; opacity: 1; animation: none; }
+        .email-display { background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: 12px; padding: 20px; text-align: center; position: relative; }
+        .email-display-label { font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 6px; }
+        .email-display-address { font-size: 1.125rem; font-weight: 600; color: var(--accent-2); user-select: all; cursor: text; }
+        .email-copy-btn { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text-muted); font-family: var(--font); font-size: 0.75rem; font-weight: 500; padding: 5px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+        .email-copy-btn:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+        .email-copy-btn.copied { background: rgba(6,182,212,0.15); border-color: rgba(6,182,212,0.3); color: var(--accent-2); }
         .modal-divider { display: flex; align-items: center; gap: 16px; margin: 20px 0 16px; }
         .modal-divider::before, .modal-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
         .modal-divider span { font-size: 0.8125rem; color: var(--text-muted); text-transform: lowercase; }
@@ -226,10 +231,11 @@
             <div id="formContent">
                 <h2>Request a Quote</h2>
                 <p>Tell us what you need and we'll get back to you within 24 hours.</p>
-                <a href="mailto:james@skill-cape.com" class="btn btn-primary btn-submit modal-email-btn">
-                    Email Us — james@skill-cape.com
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
+                <div class="email-display">
+                    <div class="email-display-label">Email us at</div>
+                    <div class="email-display-address" id="emailDisplay">james@skill-cape.com</div>
+                    <button class="email-copy-btn" onclick="copyEmail()" id="copyBtn">Copy</button>
+                </div>
                 <div class="modal-divider"><span>or fill out the form</span></div>
                 <form id="quoteForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <div class="form-group">
@@ -280,6 +286,15 @@
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') closeModal();
     });
+
+    // Copy email
+    function copyEmail() {
+        navigator.clipboard.writeText('james@skill-cape.com');
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    }
 
     // Form submission
     document.getElementById('quoteForm').addEventListener('submit', async (e) => {
